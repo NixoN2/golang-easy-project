@@ -69,6 +69,14 @@ func DatabaseInit() (*sql.DB, error) {
 	}
 
 	fmt.Println("Database connected")
+
+	defer func() {
+		err := db.Close()
+		if err != nil {
+			// Log or handle the error appropriately
+			log.Println("Error closing the database:", err)
+		}
+	}()
 	// Return the database connection
 	return db, nil
 }

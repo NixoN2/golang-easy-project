@@ -3,7 +3,8 @@ package app
 import (
 	"fmt"
 	"golang-easy-project/internal/config"
-	"log"
+	"golang-easy-project/internal/services"
+	"golang-easy-project/internal/transport/rest"
 )
 
 func Run() {
@@ -15,11 +16,10 @@ func Run() {
 	if err != nil {
 		panic(err)
 	}
-	defer func() {
-		err := db.Close()
-		if err != nil {
-			// Log or handle the error appropriately
-			log.Println("Error closing the database:", err)
-		}
-	}()
+
+	userService := services.GetUserService(db)
+
+	api := rest.GetAPI(userService)
+	addr := fmt.Sprintf(":%s", "8080")
+	api.Run(addr)
 }
