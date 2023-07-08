@@ -1,9 +1,9 @@
 package main
 
-/*import (
-	"github.com/Avksenchik/golang-project-template/internal/app"
+import (
+	"golang-easy-project/internal/app"
 )
 
 func main() {
 	app.Run()
-}*/
+}
